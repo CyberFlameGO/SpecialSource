@@ -230,7 +230,7 @@ public class Jar implements Closeable {
      * @throws IOException
      */
     public static Jar init(List<File> files) throws IOException {
-        Preconditions.checkArgument(files.size() > 0, "Jar init requires at least one file!");
+        Preconditions.checkArgument(!files.isEmpty(), "Jar init requires at least one file!");
 
         // Save some time by resizing these to their target size
         List<JarFile> jarFiles = new ArrayList<JarFile>(files.size());

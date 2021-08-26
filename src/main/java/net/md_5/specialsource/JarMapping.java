@@ -162,7 +162,7 @@ public class JarMapping {
             }
         }
 
-        if (srgFiles.size() == 0) {
+        if (srgFiles.isEmpty()) {
             throw new IOException("loadMappingsDir(" + dirname + "): no joined.srg, client.srg, or server.srg found");
         }
 
@@ -390,9 +390,6 @@ public class JarMapping {
 
                 if (reverse) {
                     String newClassName = reverseMap.map(oldClassName);
-                    if (newClassName.equals(oldClassName)) {
-                        // throw new IOException("Invalid csrg file line, could not be reversed: " + line);
-                    }
                     oldClassName = newClassName;
                     oldMethodDescriptor = reverseMap.mapMethodDesc(oldMethodDescriptor);
 
@@ -412,9 +409,6 @@ public class JarMapping {
 
                 if (reverse) {
                     String newClassName = reverseMap.map(oldClassName);
-                    if (newClassName.equals(oldClassName)) {
-                        // throw new IOException("Invalid csrg file line, could not be reversed: " + line);
-                    }
                     oldClassName = newClassName;
                     oldFieldDescriptor = reverseMap.mapDesc(oldFieldDescriptor);
 
@@ -473,9 +467,6 @@ public class JarMapping {
 
             if (reverse) {
                 String newClassName = reverseMap.map(oldClassName);
-                if (newClassName.equals(oldClassName)) {
-                    // throw new IOException("Invalid csrg file line, could not be reversed: " + line);
-                }
                 oldClassName = newClassName;
 
                 String temp = newFieldName;
@@ -492,9 +483,6 @@ public class JarMapping {
 
             if (reverse) {
                 String newClassName = reverseMap.map(oldClassName);
-                if (newClassName.equals(oldClassName)) {
-                    // throw new IOException("Invalid csrg file line, could not be reversed: " + line);
-                }
                 oldClassName = newClassName;
                 oldMethodDescriptor = reverseMap.mapMethodDesc(oldMethodDescriptor);
 

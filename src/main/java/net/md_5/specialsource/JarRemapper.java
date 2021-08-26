@@ -166,7 +166,7 @@ public class JarRemapper extends CustomRemapper {
     }
 
     public void remapJar(Jar jar, File target) throws IOException {
-        remapJar(jar, target, Collections.EMPTY_SET);
+        remapJar(jar, target, Collections.emptySet());
     }
 
     /**

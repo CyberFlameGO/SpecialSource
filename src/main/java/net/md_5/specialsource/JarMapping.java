@@ -199,8 +199,12 @@ public class JarMapping {
     }
 
     public void loadMappings(File file) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            loadMappings(reader, null, null, false);
+        loadMappings(new FileInputStream(file));
+    }
+
+    public void loadMappings(InputStream stream) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
+        loadMappings(reader, null, null, false);
         }
     }
 

@@ -85,9 +85,7 @@ public class MavenShade extends MappingTransformer {
 
             // Match the pattern.. currently, only _exact prefixes_ and replacements are supported
             if (className.startsWith(toInternalName(pattern))) { // TODO: regex support?
-                String newClassName = toInternalName(shadedPattern) + className.substring(pattern.length());
-
-                return newClassName;
+                return toInternalName(shadedPattern) + className.substring(pattern.length());
             }
         }
 

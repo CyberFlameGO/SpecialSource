@@ -162,7 +162,7 @@ public class JarMapping {
             }
         }
 
-        if (srgFiles.size() == 0) {
+        if (srgFiles.isEmpty()) {
             throw new IOException("loadMappingsDir(" + dirname + "): no joined.srg, client.srg, or server.srg found");
         }
 
@@ -199,8 +199,12 @@ public class JarMapping {
     }
 
     public void loadMappings(File file) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            loadMappings(reader, null, null, false);
+        loadMappings(new FileInputStream(file));
+    }
+
+    public void loadMappings(InputStream stream) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
+        loadMappings(reader, null, null, false);
         }
     }
 
@@ -390,9 +394,6 @@ public class JarMapping {
 
                 if (reverse) {
                     String newClassName = reverseMap.map(oldClassName);
-                    if (newClassName.equals(oldClassName)) {
-                        // throw new IOException("Invalid csrg file line, could not be reversed: " + line);
-                    }
                     oldClassName = newClassName;
                     oldMethodDescriptor = reverseMap.mapMethodDesc(oldMethodDescriptor);
 
@@ -412,9 +413,6 @@ public class JarMapping {
 
                 if (reverse) {
                     String newClassName = reverseMap.map(oldClassName);
-                    if (newClassName.equals(oldClassName)) {
-                        // throw new IOException("Invalid csrg file line, could not be reversed: " + line);
-                    }
                     oldClassName = newClassName;
                     oldFieldDescriptor = reverseMap.mapDesc(oldFieldDescriptor);
 
@@ -473,9 +471,6 @@ public class JarMapping {
 
             if (reverse) {
                 String newClassName = reverseMap.map(oldClassName);
-                if (newClassName.equals(oldClassName)) {
-                    // throw new IOException("Invalid csrg file line, could not be reversed: " + line);
-                }
                 oldClassName = newClassName;
 
                 String temp = newFieldName;
@@ -492,9 +487,6 @@ public class JarMapping {
 
             if (reverse) {
                 String newClassName = reverseMap.map(oldClassName);
-                if (newClassName.equals(oldClassName)) {
-                    // throw new IOException("Invalid csrg file line, could not be reversed: " + line);
-                }
                 oldClassName = newClassName;
                 oldMethodDescriptor = reverseMap.mapMethodDesc(oldMethodDescriptor);
 

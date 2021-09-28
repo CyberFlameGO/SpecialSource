@@ -28,12 +28,12 @@
  */
 package net.md_5.specialsource;
 
+import java.util.stream.Collectors;
 import net.md_5.specialsource.provider.InheritanceProvider;
 import com.google.common.base.Joiner;
 import com.google.common.collect.BiMap;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -53,17 +53,10 @@ public class InheritanceMap implements InheritanceProvider {
             if (parents == null) {
                 System.out.println("No inheritance information found for " + className);
             } else {
-                ArrayList<String> filteredParents = new ArrayList<String>();
-
-                // Include only classes requested
-                for (String parent : parents) {
-                    if (classes.contains(parent)) {
-                        filteredParents.add(parent);
-                    }
-                }
+                ArrayList<String> filteredParents = (ArrayList<String>) parents.stream().filter(classes::contains).collect(Collectors.toList());
 
                 // If there are parents we care about, add to map
-                if (filteredParents.size() > 0) {
+                if (!filteredParents.isEmpty()) {
                     setParents(className, filteredParents);
                 }
             }
